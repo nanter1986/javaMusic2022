@@ -15,36 +15,44 @@ public class First {
         Player player = new Player();
 
         Pattern vocals = new Pattern();
-        vocals.add("C5h Rq D5i E5i | G5h Rq F5i E5i | E5h Rq F5i G5i | A5h Rq B5i B5i");
+        String vocalsStaccato=new MelodyMaker().vocals();
+        vocals.add(vocalsStaccato);
         vocals.setInstrument("HARMONICA");
 
+        String BassDrumRythm="";
+        String SnareRythm="";
+        String HiHatRythm="";
+        String ClapRythm="";
         Rhythm rhythm = new Rhythm()
-                .addLayer("O...O...O...O...")
-                .addLayer("..S...S...S...S.")
-                .addLayer("````````````````")
-                .addLayer("X.......X.......");
+                .addLayer(BassDrumRythm)
+                .addLayer(SnareRythm)
+                .addLayer(HiHatRythm)
+                .addLayer(ClapRythm);
 
-        ChordProgression cp = new ChordProgression("I V iii vi")
-                .setKey("C")
+        String chordProg=new ChordChooser().chooseChords();
+        String key=new KeyChooser().chooseKey();
+        String chordStrumPattern=new ChordStrumPattern().makeStrumPattern();
+        ChordProgression cp = new ChordProgression(chordProg)
+                .setKey(key)
                 .distribute("9")
-                .allChordsAs("$0i $0i ri $0i ri $0i ri $0i | $1i $1i ri $1i ri $1i ri $1i |  $2i $2i ri $2i ri $2i ri $2i |  $3i $3i ri $3i ri $3i ri $3i |");
+                .allChordsAs(chordStrumPattern);
 
 
         Pattern p=new Pattern(vocals.setVoice(1).repeat(2),cp.getPattern().setVoice(0).repeat(2),rhythm.getPattern().repeat(4).setVoice(3));
 
-        player.play(p);
-
+        String time=new TimeGrabber().grabTime();
+        System.out.println(time);
         try {
-            File filePath = new File("aaa.mid");
+            File filePath = new File(time+".mid");
             filePath.createNewFile();
             MidiFileManager.savePatternToMidi(p, filePath);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
+        player.play(p);
         Pattern loadedFile = new Pattern();
         try {
-            File filePath2 = new File("aaa.mid");
+            File filePath2 = new File("ddd.mid");
             loadedFile = MidiFileManager.loadPatternFromMidi(filePath2);
         } catch (InvalidMidiDataException e) {
             e.printStackTrace();
