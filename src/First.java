@@ -34,8 +34,9 @@ public class First {
         String chordStrumPattern=new ChordStrumPattern().makeStrumPattern();
         ChordProgression cp = new ChordProgression(chordProg)
                 .setKey(key)
-                .distribute("9")
                 .allChordsAs(chordStrumPattern);
+
+        System.out.println("notes:"+cp.getChords()[0].getNotes()[0].toString());
 
 
         Pattern p=new Pattern(vocals.setVoice(1).repeat(2),cp.getPattern().setVoice(0).repeat(2),rhythm.getPattern().repeat(4).setVoice(3));
@@ -50,15 +51,15 @@ public class First {
             ex.printStackTrace();
         }
         player.play(p);
-        Pattern loadedFile = new Pattern();
-        try {
-            File filePath2 = new File("ddd.mid");
-            loadedFile = MidiFileManager.loadPatternFromMidi(filePath2);
-        } catch (InvalidMidiDataException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(loadedFile);
+//        Pattern loadedFile = new Pattern();
+//        try {
+//            File filePath2 = new File("ddd.mid");
+//            loadedFile = MidiFileManager.loadPatternFromMidi(filePath2);
+//        } catch (InvalidMidiDataException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println(loadedFile);
     }
 }

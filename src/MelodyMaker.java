@@ -1,5 +1,10 @@
+import org.jfugue.theory.Chord;
+
 public class MelodyMaker {
-    public String vocals() {
-        return "C5h Rq D5i E5i | G5h Rq F5i E5i | E5h Rq F5i G5i | A5h Rq B5i B5i";
+    public String vocals(Chord[] chords) {
+        for (Chord ch:chords){
+
+        }
+        return "C5h Rq e5i f5i | G5h Rq g5i e5i | E5h Rq F5i G5i | A5h Rq a5i B5i";
     }
 }
