@@ -14,10 +14,7 @@ public class First {
     public static void main(String[] args) {
         Player player = new Player();
 
-        Pattern vocals = new Pattern();
-        String vocalsStaccato=new MelodyMaker().vocals();
-        vocals.add(vocalsStaccato);
-        vocals.setInstrument("HARMONICA");
+
 
         String BassDrumRythm="";
         String SnareRythm="";
@@ -35,6 +32,11 @@ public class First {
         ChordProgression cp = new ChordProgression(chordProg)
                 .setKey(key)
                 .allChordsAs(chordStrumPattern);
+        String vocalsStaccato=new MelodyMaker().vocals(cp.getChords());
+        Pattern vocals = new Pattern();
+
+        vocals.add(vocalsStaccato);
+        vocals.setInstrument("HARMONICA");
 
         System.out.println("notes:"+cp.getChords()[0].getNotes()[0].toString());
 
